@@ -1,8 +1,9 @@
 ---
 - hosts: all
   vars:
-    user: HOGE
+    user: WORKER_USER(should be changed)
   roles:
     - vim
-    - rbenv
+    - tmux
+    - ag
     - nvm

@@ -23,21 +23,21 @@
   sudo: yes
   group: name=rbenv
 
-- name: change group of rbenv
+- name: change attributes of {{rbenv_root}}
   sudo: yes
-  shell: chgrp -R rbenv {{rbenv_root}}
-
-- name: change mode of rbenv
-  sudo: yes
-  shell: chmod -R g+rwXs {{rbenv_root}}
-
+  file:
+    path: "{{rbenv_root}}"
+    mode: g+rwXs
+    group: rbenv
+    state: directory
+    recurse: yes
 
 - name: add user to rbenv group
   sudo: yes
   user: name={{user}} append=yes groups=rbenv
 
 - name: install ruby with rbenv
-  shell: rbenv install {{ruby_version}}
+  shell: /bin/bash -lc 'rbenv install {{ruby_version}}'
 
 - name: set ruby {{ruby_version}} for system
-  shell: rbenv global {{ruby_version}} && rbenv rehash
+  shell: /bin/bash -lc 'rbenv global {{ruby_version}} && rbenv rehash'

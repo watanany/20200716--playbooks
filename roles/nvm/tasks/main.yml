@@ -5,32 +5,32 @@
     repo: https://github.com/creationix/nvm.git
     dest: "{{nvm_root}}"
 
-- name: set node.js env file
-  sudo: yes
-  template: src=nvm.sh.j2 dest=/etc/profile.d/nvm.sh
-
 - name: make group of nvm
   sudo: yes
   group: name=nvm
 
-- name: change group of nvm
+- name: change attributes of {{nvm_root}}
   sudo: yes
-  shell: chgrp -R nvm {{nvm_root}}
+  file:
+    path: "{{nvm_root}}"
+    mode: g+rwXs
+    group: nvm
+    state: directory
+    recurse: yes
 
-- name: change mode of nvm
+- name: set node.js env file
   sudo: yes
-  shell: chmod g+rwXs {{nvm_root}}
+  template: src=nvm.sh.j2 dest=/etc/profile.d/nvm.sh
 
-
-- name: add user to rbenv group
+- name: add user to nvm group
   sudo: yes
   user: name={{user}} append=yes groups=nvm
 
 - name: install node.js with nvm
-  shell: nvm install {{node_version}}
+  shell: /bin/bash -lc 'nvm install {{node_version}}'
 
 - name: set node.js {{node_version}} for system
-  shell: nvm alias default v{{node_version}}
+  shell: /bin/bash -lc 'nvm alias default v{{node_version}}'
 
 - name: install coffee-script
-  shell: npm install -g coffee-script
+  shell: /bin/bash -lc 'npm install -g coffee-script'
