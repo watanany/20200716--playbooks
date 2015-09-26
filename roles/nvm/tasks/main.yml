@@ -1,0 +1,17 @@
+---
+- name: clone nvm.git
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{nvm_root}}"
+
+- name: set node.js env file
+  template: src=nvm.sh.j2 dest=/etc/profile.d/nvm.sh
+
+- name: make group of nvm
+  group: name=nvm
+
+- name: change group of nvm
+  shell: chgrp -R nvm {{nvm_root}}
+
+- name: change mode of nvm
+  shell: chmod g+rwX {{nvm_root}}

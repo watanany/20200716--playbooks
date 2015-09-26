@@ -1,3 +1,4 @@
+---
 - name: groupinstall Development tools
   yum: name="@Development tools" state=present
 

@@ -1,3 +1,4 @@
+---
 - name: install dependencies
   yum: pkg={{item}} state=latest
   with_items:
@@ -12,24 +13,13 @@
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
 
 - name: set rbenv env file
-  copy: src=rbenv.sh dest=/etc/profile.d mode=0775
+  template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh
 
+- name: make rbenv group
+  group: name=rbenv
 
-- name: restart shell (local)
-  shell: exec $SHELL -l
+- name: change group of rbenv
+  shell: chgrp -R rbenv {{rbenv_root}}
 
-- debug:
-    msg: "{{ lookup('env', 'PATH') }}"
-
-
-- name: check whether ruby is installed
-  shell: test ! -e {{rbenv_root}}/versions/{{ruby_version}}
-  register: result
-  ignore_errors: yes
-
-- name: install ruby with rbenv
-  shell: "rbenv install {{ruby_version}}"
-  when: result|success
-
-- name: set ruby {{ruby_version}} for system
-  shell: "rbenv global {{ruby_version}} && rbenv rehash"
+- name: change mode of rbenv
+  shell: chmod -R g+rwX {{rbenv_root}}
