@@ -3,5 +3,5 @@
   connection: local
   roles:
     # - vim
-    # - rbenv
-    - nvm
+    - rbenv
+    # - nvm

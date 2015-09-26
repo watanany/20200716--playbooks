@@ -1,5 +1,6 @@
 ---
 - name: install dependencies
+  sudo: yes
   yum: pkg={{item}} state=latest
   with_items:
     - openssl-devel
@@ -7,19 +8,25 @@
     - zlib-devel
 
 - name: install rbenv
+  sudo: yes
   git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
 
 - name: install ruby-build
+  sudo: yes
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
 
 - name: set rbenv env file
+  sudo: yes
   template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh
 
 - name: make rbenv group
+  sudo: yes
   group: name=rbenv
 
 - name: change group of rbenv
+  sudo: yes
   shell: chgrp -R rbenv {{rbenv_root}}
 
 - name: change mode of rbenv
+  sudo: yes
   shell: chmod -R g+rwX {{rbenv_root}}
