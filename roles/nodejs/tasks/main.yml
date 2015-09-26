@@ -1,0 +1,25 @@
+---
+- name: clone nvm
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{nvm_root}}"
+
+- name: set node.js env file
+  copy:
+    src: nodejs.sh
+    dest: /etc/profile.d
+    mode: 0775
+
+- name: restart shell
+  shell: exec $SHELL -l
+
+- name: install node.js
+  shell: nvm install {{node_version}}
+
+- name: set system node.js version
+  shell: nvm alias default v{{node_version}}
+
+- name: install coffee-script
+  shell: npm install -g coffee-script
+
+

@@ -1,0 +1,38 @@
+- name: groupinstall Development tools
+  yum: name="@Development tools" state=present
+
+- name: install ncurses-devel
+  yum: name=ncurses-devel state=present
+
+- name: install lua-devel
+  yum: name=lua-devel state=present
+
+- name: install python-devel
+  yum: name=python-devel state=present
+
+- name: install ruby-devel
+  yum: name=ruby-devel state=present
+
+- name: clone vim repositry from github
+  git: repo=https://github.com/vim/vim.git dest={{src_dir}}
+
+- name: configure vim source
+  shell: >
+      ./configure
+      --with-features=huge
+      --enable-multibyte
+      --enable-luainterp
+      --enable-rubyinterp
+      --enable-pythoninterp
+  args:
+    chdir: "{{src_dir}}"
+
+- name: compile vim source
+  shell: make
+  args:
+    chdir: "{{src_dir}}"
+
+- name: install vim files
+  shell: make install
+  args:
+    chdir: "{{src_dir}}"

@@ -1,0 +1,35 @@
+- name: install dependencies
+  yum: pkg={{item}} state=latest
+  with_items:
+    - openssl-devel
+    - readline-devel
+    - zlib-devel
+
+- name: install rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
+
+- name: install ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
+
+- name: set rbenv env file
+  copy: src=rbenv.sh dest=/etc/profile.d mode=0775
+
+
+- name: restart shell (local)
+  shell: exec $SHELL -l
+
+- debug:
+    msg: "{{ lookup('env', 'PATH') }}"
+
+
+- name: check whether ruby is installed
+  shell: test ! -e {{rbenv_root}}/versions/{{ruby_version}}
+  register: result
+  ignore_errors: yes
+
+- name: install ruby with rbenv
+  shell: "rbenv install {{ruby_version}}"
+  when: result|success
+
+- name: set ruby {{ruby_version}} for system
+  shell: "rbenv global {{ruby_version}} && rbenv rehash"
