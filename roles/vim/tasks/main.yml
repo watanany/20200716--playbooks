@@ -1,23 +1,16 @@
 ---
 - name: groupinstall Development tools
   sudo: yes
-  yum: name="@Development tools" state=present
+  yum: name="@Development tools"
 
-- name: install ncurses-devel
+- name: install dependencies
   sudo: yes
-  yum: name=ncurses-devel state=present
-
-- name: install lua-devel
-  sudo: yes
-  yum: name=lua-devel state=present
-
-- name: install python-devel
-  sudo: yes
-  yum: name=python-devel state=present
-
-- name: install ruby-devel
-  sudo: yes
-  yum: name=ruby-devel state=present
+  yum: name={{item}}
+  with_items:
+    - ncurses-devel
+    - lua-devel
+    - python-devel
+    - ruby-devel
 
 - name: clone vim repositry from github
   sudo: yes
