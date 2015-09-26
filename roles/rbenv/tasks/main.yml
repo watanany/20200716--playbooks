@@ -1,7 +1,7 @@
 ---
 - name: install dependencies
   sudo: yes
-  yum: pkg={{item}} state=latest
+  yum: name={{item}} state=latest
   with_items:
     - openssl-devel
     - readline-devel
