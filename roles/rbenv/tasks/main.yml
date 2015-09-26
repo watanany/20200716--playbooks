@@ -30,3 +30,14 @@
 - name: change mode of rbenv
   sudo: yes
   shell: chmod -R g+rwXs {{rbenv_root}}
+
+
+- name: add user to rbenv group
+  sudo: yes
+  user: name={{user}} append=yes groups=rbenv
+
+- name: install ruby with rbenv
+  shell: rbenv install {{ruby_version}}
+
+- name: set ruby {{ruby_version}} for system
+  shell: rbenv global {{ruby_version}} && rbenv rehash

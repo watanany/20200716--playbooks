@@ -20,3 +20,17 @@
 - name: change mode of nvm
   sudo: yes
   shell: chmod g+rwXs {{nvm_root}}
+
+
+- name: add user to rbenv group
+  sudo: yes
+  user: name={{user}} append=yes groups=nvm
+
+- name: install node.js with nvm
+  shell: nvm install {{node_version}}
+
+- name: set node.js {{node_version}} for system
+  shell: nvm alias default v{{node_version}}
+
+- name: install coffee-script
+  shell: npm install -g coffee-script
