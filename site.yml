@@ -1,7 +1,8 @@
 ---
 - hosts: all
-  connection: local
+  vars:
+    user: vagrant
   roles:
-    # - vim
+    - vim
     - rbenv
-    # - nvm
+    - nvm

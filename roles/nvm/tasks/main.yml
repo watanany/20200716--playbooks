@@ -19,4 +19,4 @@
 
 - name: change mode of nvm
   sudo: yes
-  shell: chmod g+rwX {{nvm_root}}
+  shell: chmod g+rwXs {{nvm_root}}

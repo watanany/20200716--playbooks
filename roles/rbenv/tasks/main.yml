@@ -29,4 +29,4 @@
 
 - name: change mode of rbenv
   sudo: yes
-  shell: chmod -R g+rwX {{rbenv_root}}
+  shell: chmod -R g+rwXs {{rbenv_root}}
