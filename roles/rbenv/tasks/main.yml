@@ -34,7 +34,7 @@
 
 - name: add user to rbenv group
   sudo: yes
-  user: name={{user}} append=yes groups=rbenv
+  user: name={{rbenv_user}} append=yes groups=rbenv
 
 - name: install ruby with rbenv
   shell: /bin/bash -lc 'rbenv install {{ruby_version}}'

@@ -24,7 +24,7 @@
 
 - name: add user to nvm group
   sudo: yes
-  user: name={{user}} append=yes groups=nvm
+  user: name={{nvm_user}} append=yes groups=nvm
 
 - name: install node.js with nvm
   shell: /bin/bash -lc 'nvm install {{node_version}}'
