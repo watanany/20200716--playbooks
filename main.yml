@@ -1,9 +1,12 @@
 ---
 - hosts: all
   vars:
-    user: WORKER_USER(should be changed)
+    user: WORKER_USER(must be changed)
+    rbenv_user: "{{user}}"
+    nvm_user: "{{user}}"
   roles:
     - vim
     - tmux
     - ag
     - nvm
+    - mysql
