@@ -30,7 +30,7 @@
   shell: /bin/bash -lc 'nvm install {{node_version}}'
 
 - name: set node.js {{node_version}} for system
-  shell: /bin/bash -lc 'nvm alias default v{{node_version}}'
+  shell: /bin/bash -lc 'nvm alias default {{node_version}}'
 
 - name: install coffee-script
   shell: /bin/bash -lc 'npm install -g coffee-script'
