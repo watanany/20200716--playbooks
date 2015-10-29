@@ -1,0 +1,41 @@
+---
+- name: install dependencies
+  sudo: yes
+  yum: name={{item}} state=latest
+  with_items:
+    - openssl-devel
+    - readline-devel
+    - zlib-devel
+    - bzip2-devel
+    - sqlite-devel
+
+- name: install pyenv
+  sudo: yes
+  git: repo=https://github.com/sstephenson/pyenv.git dest={{pyenv_root}}
+
+- name: set pyenv env file
+  sudo: yes
+  template: src=pyenv.sh.j2 dest=/etc/profile.d/pyenv.sh
+
+- name: make pyenv group
+  sudo: yes
+  group: name=pyenv
+
+- name: change attributes of {{pyenv_root}}
+  sudo: yes
+  file:
+    path: "{{pyenv_root}}"
+    mode: g+rwXs
+    group: pyenv
+    state: directory
+    recurse: yes
+
+- name: add user to pyenv group
+  sudo: yes
+  user: name={{pyenv_user}} append=yes groups=pyenv
+
+- name: install python with pyenv
+  shell: /bin/bash -lc 'pyenv install {{python_version}}'
+
+- name: set python {{python_version}} for system
+  shell: /bin/bash -lc 'pyenv global {{python_version}} && pyenv rehash'
