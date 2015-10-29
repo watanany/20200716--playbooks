@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:
-    user: WORKER_USER(must be changed)
+    user: watanabe_shingo
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
   roles:
@@ -10,3 +10,4 @@
     - ag
     - nvm
     - mysql
+    - pyenv
