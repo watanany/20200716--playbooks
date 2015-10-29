@@ -1,9 +1,10 @@
 ---
 - hosts: all
   vars:
-    user: watanabe_shingo
+    user: WORKER_USER
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
+    pyenv_user: "{{user}}"
   roles:
     - vim
     - tmux
