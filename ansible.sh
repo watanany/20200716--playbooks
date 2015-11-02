@@ -15,4 +15,4 @@ while read line; do
 done < $main_file
 
 # execute roles
-ansible-playbook -i $inventory --verbose $@ $main_file
+ansible-playbook -i $inventory $@ $main_file

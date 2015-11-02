@@ -1,4 +1,4 @@
 ---
 - name: install zsh
   sudo: yes
-  yum: name=zsh state=present
+  yum: name=zsh

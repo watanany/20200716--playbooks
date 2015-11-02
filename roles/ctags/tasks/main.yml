@@ -1,0 +1,4 @@
+---
+- name: install ctags
+  sudo: yes
+  yum: name=ctags
