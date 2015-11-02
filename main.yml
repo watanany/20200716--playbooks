@@ -1,14 +1,17 @@
 ---
 - hosts: all
   vars:
-    user: WORKER_USER
+    user: watanabe_shingo
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
   roles:
+    - zsh
+    - user
     - vim
     - tmux
     - ag
     - nvm
     - mysql
+    - rbenv
     - pyenv

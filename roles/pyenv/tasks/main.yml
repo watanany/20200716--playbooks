@@ -11,7 +11,7 @@
 
 - name: install pyenv
   sudo: yes
-  git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}}
+  git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}} force=yes
 
 - name: set pyenv env file
   sudo: yes
