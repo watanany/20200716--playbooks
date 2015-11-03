@@ -4,13 +4,13 @@
 
 _CentOS 6用_
 
-* common
-  * kernel-devel
-  * zsh
-  * tmux
-  * vim
-  * ag
-  * ctags
+* kernel-devel
+* user - create wheel user
+* zsh
+* tmux
+* vim
+* ag
+* ctags
 * rbenv - System Wide
 * pyenv - System Wide
 * nvm - System Wide
