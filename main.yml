@@ -6,13 +6,13 @@
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
   roles:
+    - user
     - ag
     - ctags
     - tmux
     - zsh
     - vim
     - mysql
-    - user
+    # - nvm
     - pyenv
-    - rbenv
-    - nvm
+    # - rbenv
