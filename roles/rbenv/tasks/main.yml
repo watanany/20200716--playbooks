@@ -32,11 +32,11 @@
 
 - name: install rbenv
   sudo: yes
-  git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}} force=yes
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
 
 - name: install ruby-build
   sudo: yes
-  git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build force=yes
+  git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
 
 - name: set rbenv env file
   sudo: yes

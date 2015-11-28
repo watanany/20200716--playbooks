@@ -14,7 +14,7 @@
 
 - name: clone vim repositry from github
   sudo: yes
-  git: repo=https://github.com/vim/vim.git dest={{src_dir}} force=yes
+  git: repo=https://github.com/vim/vim.git dest={{src_dir}}
 
 - name: configure vim source
   sudo: yes
