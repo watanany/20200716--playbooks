@@ -1,0 +1,41 @@
+---
+- name: groupinstall Development tools
+  sudo: yes
+  yum: name="@Development tools"
+
+- name: install dependencies
+  sudo: yes
+  yum: name={{item}}
+  with_items:
+    - ncurses-devel
+    - lua-devel
+    - python-devel
+    - ruby-devel
+
+- name: clone vim repositry from github
+  sudo: yes
+  git: repo=https://github.com/vim/vim.git dest={{src_dir}} force=yes
+
+- name: configure vim source
+  sudo: yes
+  shell: >
+      ./configure
+      --with-features=huge
+      --enable-multibyte
+      --enable-luainterp
+      --enable-rubyinterp
+      --enable-pythoninterp
+  args:
+    chdir: "{{src_dir}}"
+
+- name: compile vim source
+  sudo: yes
+  shell: make
+  args:
+    chdir: "{{src_dir}}"
+
+- name: install vim files
+  sudo: yes
+  shell: make install
+  args:
+    chdir: "{{src_dir}}"

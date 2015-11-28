@@ -1,0 +1,18 @@
+---
+- name: add user
+  sudo: yes
+  user:
+    name: "{{user}}"
+    password: "$6$rounds=656000$AT3KtKdnzx9iJ00F$qoGzOkIzEVw0tjwMdcg1B0HyLGr6a8Jvxu5VTUGweqXkEsLiK8RFRdxRTRlFWTJksqTZDRfCbqs7pofS7FxQH1"
+    shell: /bin/bash
+    append: yes
+    groups: wheel
+
+- name: set wheel group
+  sudo: yes
+  lineinfile:
+    dest: /etc/sudoers
+    backup: yes
+    backrefs: yes
+    regexp: ^#(\s*%wheel.*NOPASSWD.*)$
+    line: \1

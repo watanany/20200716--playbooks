@@ -1,19 +1,18 @@
 ---
 - hosts: all
   vars:
-    user: watanabe_shingo
+    user: vagrant
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
   roles:
-    - kernel-devel
-    - zsh
-    - user
-    - vim
-    - tmux
     - ag
     - ctags
-    - nvm
+    - tmux
+    - zsh
+    - vim
     - mysql
-    - rbenv
+    - user
     - pyenv
+    - rbenv
+    - nvm

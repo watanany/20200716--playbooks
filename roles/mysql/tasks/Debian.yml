@@ -1,0 +1,11 @@
+---
+- name: install mysql
+  sudo: yes
+  apt: name=mysql-server
+
+- name: service mysql
+  sudo: yes
+  service:
+    name: mysql
+    state: started
+    enabled: yes

@@ -1,16 +1,8 @@
 ---
-- name: install mysql
-  sudo: yes
-  yum: name={{item}}
-  with_items:
-    - mysql
-    - mysql-devel
-    - mysql-server
-    - mysql-utilities
+- name: include RedHat.yml
+  include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
-- name: service mysql
-  sudo: yes
-  service:
-    name: mysqld
-    state: started
-    enabled: yes
+- name: include Debian.yml
+  include: Debian.yml
+  when: ansible_os_family == 'Debian'

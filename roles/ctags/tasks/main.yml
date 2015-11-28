@@ -1,4 +1,13 @@
 ---
-- name: install ctags
+- name: install ctags in RedHat family
   sudo: yes
   yum: name=ctags
+  when: ansible_os_family == 'RedHat'
+
+- name: install ctags in Debian family
+  sudo: yes
+  apt: name=ctags
+  when: ansible_os_family == 'Debian'
+
+
+

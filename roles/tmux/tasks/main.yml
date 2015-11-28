@@ -1,4 +1,10 @@
 ---
-- name: install tmux
+- name: install tmux in RedHat family
   sudo: yes
   yum: name=tmux
+  when: ansible_os_family == 'RedHat'
+
+- name: install tmux in Debian family
+  sudo: yes
+  apt: name=tmux
+  when: ansible_os_family == 'Debian'

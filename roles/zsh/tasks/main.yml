@@ -1,4 +1,11 @@
 ---
-- name: install zsh
+- name: install zsh in RedHat family
   sudo: yes
   yum: name=zsh
+  when: ansible_os_family == 'RedHat'
+
+- name: install zsh in Debian family
+  sudo: yes
+  apt: name=zsh
+  when: ansible_os_family == 'Debian'
+

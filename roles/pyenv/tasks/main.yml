@@ -1,5 +1,5 @@
 ---
-- name: install dependencies
+- name: install dependencies in CentOS
   sudo: yes
   yum: name={{item}} state=latest
   with_items:
@@ -8,6 +8,24 @@
     - zlib-devel
     - bzip2-devel
     - sqlite-devel
+  when: ansible_distribution == 'CentOS'
+
+- name: install dependencies in Debian family
+  sudo: yes
+  apt: name={{item}} state=latest
+  with_items:
+    - make
+    - build-essential
+    - libssl-dev
+    - zlib1g-dev
+    - libbz2-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - wget
+    - curl
+    - llvm
+    - libncurses5-dev
+  when: ansible_os_family == 'Debian'
 
 - name: install pyenv
   sudo: yes

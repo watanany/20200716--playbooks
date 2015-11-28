@@ -1,11 +1,34 @@
 ---
-- name: install dependencies
+- name: install dependencies in CentOS
   sudo: yes
   yum: name={{item}} state=latest
   with_items:
+    - gcc
     - openssl-devel
+    - libyaml-devel
+    - libffi-devel
     - readline-devel
     - zlib-devel
+    - gdbm-devel
+    - ncurses-devel
+  when: ansible_distribution == 'CentOS'
+
+- name: install dependencies in Debian family
+  sudo: yes
+  apt: name={{item}} state=latest
+  with_items:
+    - autoconf
+    - bison
+    - build-essential
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
+  when: ansible_os_family == 'Debian'
 
 - name: install rbenv
   sudo: yes
