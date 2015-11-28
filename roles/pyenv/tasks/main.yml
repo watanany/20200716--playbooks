@@ -31,13 +31,17 @@
   sudo: yes
   git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}}
 
-- name: set pyenv env file
-  sudo: yes
-  template: src=pyenv.sh.j2 dest=/etc/profile.d/pyenv.sh
-
 - name: make pyenv group
   sudo: yes
   group: name=pyenv
+
+- name: set pyenv env file
+  sudo: yes
+  template: >
+    src=pyenv.sh.j2
+    dest=/etc/profile.d/pyenv.sh
+    mode=644
+    group=pyenv
 
 - name: change attributes of {{pyenv_root}}
   sudo: yes

@@ -38,13 +38,17 @@
   sudo: yes
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
 
-- name: set rbenv env file
-  sudo: yes
-  template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh
-
 - name: make rbenv group
   sudo: yes
   group: name=rbenv
+
+- name: set rbenv env file
+  sudo: yes
+  template: >
+    src=rbenv.sh.j2
+    dest=/etc/profile.d/rbenv.sh
+    mode=664
+    group=rbenv
 
 - name: change attributes of {{rbenv_root}}
   sudo: yes
