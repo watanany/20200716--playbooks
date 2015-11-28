@@ -13,6 +13,6 @@
     - zsh
     - vim
     - mysql
-    # - nvm
+    - nvm
     - pyenv
-    # - rbenv
+    - rbenv
