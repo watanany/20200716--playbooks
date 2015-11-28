@@ -29,7 +29,7 @@
 
 - name: install pyenv
   sudo: yes
-  git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}} force=yes
+  git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}}
 
 - name: set pyenv env file
   sudo: yes
@@ -47,6 +47,12 @@
     group: pyenv
     state: directory
     recurse: yes
+
+- name: install virtualenv as pyenv plugin
+  sudo: yes
+  git: >
+    repo=https://github.com/yyuu/pyenv-virtualenv.git
+    dest={{pyenv_root}}/plugins/pyenv-virtualenv
 
 - name: add user to pyenv group
   sudo: yes
