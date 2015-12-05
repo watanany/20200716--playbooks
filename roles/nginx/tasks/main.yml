@@ -1,0 +1,26 @@
+---
+- name: download nginx source
+  get_url: >
+    url={{ download_url }}
+    dest={{ download_dest }}
+
+- name: decompose downloaded file
+  command: >
+    tar xzf {{ downloaded_file }}
+    chdir={{ download_dest }}
+
+- name: configure nginx
+  command: >
+    ./configure
+    chdir={{ source_dir }}
+
+- name: compile sources
+  command: >
+    make
+    chdir={{ source_dir }}
+
+- name: install nginx
+  sudo: yes
+  command: >
+    make install
+    chdir={{ source_dir }}
