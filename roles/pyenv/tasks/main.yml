@@ -62,8 +62,15 @@
   sudo: yes
   user: name={{pyenv_user}} append=yes groups=pyenv
 
+- name: check whether python was already installed or not
+  shell: /bin/bash -lc 'pyenv global {{python_version}}'
+  ignore_errors: yes
+  register: result
+
 - name: install python with pyenv
   shell: /bin/bash -lc 'pyenv install {{python_version}}'
+  when: result|failed
 
 - name: set python {{python_version}} for system
   shell: /bin/bash -lc 'pyenv global {{python_version}} && pyenv rehash'
+  when: result|failed
