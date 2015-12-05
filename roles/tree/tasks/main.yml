@@ -1,0 +1,10 @@
+---
+- name: install tree in RedHat family
+  sudo: yes
+  yum: name=tree
+  when: ansible_os_family == 'RedHat'
+
+- name: install tree in Debian family
+  sudo: yes
+  apt: name=tree
+  when: ansible_os_family == 'Debian'
