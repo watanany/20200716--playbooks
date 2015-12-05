@@ -1,0 +1,80 @@
+---
+- name: download redis source
+  get_url: >
+    url={{ download_url }}
+    dest={{ download_dest }}
+
+- name: decompose downloaded file
+  command: >
+    tar xzf {{ downloaded_file }}
+    chdir={{ download_dest }}
+
+- name: compile sources
+  command: >
+    make
+    chdir={{ source_dir }}
+
+- name: install redis
+  sudo: yes
+  command: >
+    make install
+    chdir={{ source_dir }}
+
+- name: make directory
+  sudo: yes
+  file: >
+    path=/etc/redis
+    state=directory
+    owner=root
+    mode=0755
+
+- name: make directory
+  sudo: yes
+  file: >
+    path=/var/redis/{{ port }}
+    state=directory
+    owner=root
+    mode=0755
+
+- name: copy config file
+  sudo: yes
+  copy: >
+    src={{ source_dir }}/redis.conf
+    dest={{ conf_file }}
+    owner=root
+
+- name: make redis daemon
+  sudo: yes
+  lineinfile: >
+    dest={{ conf_file }}
+    regexp="daemonize no"
+    line="daemonize yes"
+
+- name: point pidfile
+  sudo: yes
+  lineinfile: >
+    dest={{ conf_file }}
+    regexp="pidfile\s+.*"
+    line="pidfile {{ pid_file }}"
+
+- name: point logfile
+  sudo: yes
+  lineinfile: >
+    dest={{ conf_file }}
+    regexp="logfile\s+.*"
+    line="logfile {{ log_file }}"
+
+- name: point redis directory
+  sudo: yes
+  lineinfile: >
+    dest={{ conf_file }}
+    regexp="dir\s+.*"
+    line="dir {{ redis_dir }}"
+
+- name: copy init script
+  sudo: yes
+  copy: >
+    src={{ source_dir }}/redis_init_script
+    dest=/etc/init.d/redis-server
+    owner=root
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
