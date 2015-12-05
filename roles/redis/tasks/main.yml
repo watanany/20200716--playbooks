@@ -74,7 +74,7 @@
 - name: copy init script
   sudo: yes
   copy: >
-    src={{ source_dir }}/redis_init_script
+    src={{ source_dir }}/utils/redis_init_script
     dest=/etc/init.d/redis-server
     owner=root
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+    mode=0755
