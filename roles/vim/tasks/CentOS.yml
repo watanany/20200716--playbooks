@@ -14,17 +14,20 @@
 
 - name: clone vim repositry from github
   sudo: yes
-  git: repo=https://github.com/vim/vim.git dest={{src_dir}}
+  git: >
+    repo=https://github.com/vim/vim.git
+    dest={{src_dir}}
+    force=yes
 
 - name: configure vim source
   sudo: yes
   shell: >
-      ./configure
-      --with-features=huge
-      --enable-multibyte
-      --enable-luainterp
-      --enable-rubyinterp
-      --enable-pythoninterp
+    ./configure
+    --with-features=huge
+    --enable-multibyte
+    --enable-luainterp
+    --enable-rubyinterp
+    --enable-pythoninterp
   args:
     chdir: "{{src_dir}}"
 
