@@ -1,6 +1,6 @@
 ---
 version: 2.8.21
-download_url: https://github.com/antirez/redis/archive/{{ version }}.tar.gz
+download_url: http://download.redis.io/releases/redis-{{ version }}.tar.gz
 download_dest: /tmp
 downloaded_file: "{{ download_dest }}/redis-{{ version }}.tar.gz"
 source_dir: /tmp/redis-{{ version }}
