@@ -15,3 +15,5 @@ _CentOS 6_と_Debian系OS_に対応
 * pyenv - System Wide
 * nvm - System Wide
 * MySQL
+* redis
+* nginx(CentOS 6のみテスト)
