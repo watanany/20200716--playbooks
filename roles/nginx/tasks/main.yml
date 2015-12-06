@@ -1,4 +1,24 @@
 ---
+
+- name: install dependecies in CentOS
+  sudo: yes
+  yum: name={{ item }}
+  with_items:
+    - pcre-devel
+    - zlib-devel
+    - openssl-devel
+  when: ansible_distribution == 'CentOS'
+
+- name: install dependecies in Debian family
+  sudo: yes
+  apt: name={{ item }}
+  with_items:
+    - libpcre3
+    - zlib1g
+    - libssl
+  when: ansible_os_family == 'Debian'
+
+
 - name: download nginx source
   get_url: >
     url={{ download_url }}
