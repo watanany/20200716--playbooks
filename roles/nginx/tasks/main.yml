@@ -13,9 +13,9 @@
   sudo: yes
   apt: name={{ item }}
   with_items:
-    - libpcre3
-    - zlib1g
-    - libssl
+    - libpcre3-dev
+    - zlib1g-dev
+    - libssl1.0.0
   when: ansible_os_family == 'Debian'
 
 
