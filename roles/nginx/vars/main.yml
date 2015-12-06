@@ -3,4 +3,4 @@ version: 1.7.3
 download_url: http://nginx.org/download/nginx-{{ version }}.tar.gz
 download_dest: /tmp
 downloaded_file: "{{ download_dest }}/nginx-{{ version }}.tar.gz"
-source_dir: "{{ download_dest }}/nginx-{{ version }}.tar.gz"
+source_dir: "{{ download_dest }}/nginx-{{ version }}"
