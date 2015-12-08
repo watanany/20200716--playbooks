@@ -6,6 +6,7 @@
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
   roles:
+    - kernel-devel
     - user
     - ag
     - ctags
