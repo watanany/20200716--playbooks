@@ -14,6 +14,6 @@ _CentOS 6_と_Debian系OS_に対応
 * rbenv - System Wide
 * pyenv - System Wide
 * nvm - System Wide
-* MySQL
+* MySQL(バージョン指定できないため要変更)
 * redis
 * nginx(CentOS 6のみテスト)
