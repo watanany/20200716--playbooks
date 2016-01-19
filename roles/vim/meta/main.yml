@@ -1,0 +1,3 @@
+---
+dependencies:
+  - { role: kernel-devel, when: "ansible_distribution == 'CentOS'" }

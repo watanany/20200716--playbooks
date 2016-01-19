@@ -76,10 +76,6 @@
   shell: /bin/bash -lc 'rbenv global {{ruby_version}} && rbenv rehash'
   when: result|failed
 
-- name: install gem pry
-  command: /bin/bash -lc 'gem install pry'
-  when: result|failed
-
 - name: install gem bundler
   command: /bin/bash -lc 'gem install bundler'
   when: result|failed
