@@ -1,4 +1,4 @@
 ---
-- name: include CentOS.yml
-  include: CentOS.yml
-  when: ansible_distribution == 'CentOS'
+- name: include CentOS-6.yml
+  include: CentOS-6.yml
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'

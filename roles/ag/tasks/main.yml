@@ -2,7 +2,7 @@
 - name: install ag in CentOS
   sudo: yes
   yum: name=http://swiftsignal.com/packages/centos/6/x86_64/the-silver-searcher-0.14-1.el6.x86_64.rpm
-  when: ansible_distribution == 'CentOS'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '6'
 
 - name: install ag in Debian family
   sudo: yes

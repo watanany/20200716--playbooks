@@ -8,7 +8,7 @@
     - zlib-devel
     - bzip2-devel
     - sqlite-devel
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
 
 - name: install dependencies in Debian family
   sudo: yes

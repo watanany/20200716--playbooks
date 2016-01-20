@@ -7,7 +7,7 @@
     - pcre-devel
     - zlib-devel
     - openssl-devel
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
 
 - name: install dependecies in Debian family
   sudo: yes
