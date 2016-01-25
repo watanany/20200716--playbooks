@@ -1,3 +1,4 @@
 ---
 - name: install vim
+  sudo: yes
   apt: name=vim state=latest

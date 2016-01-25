@@ -1,12 +1,14 @@
 ---
 - hosts: all
   vars:
-    user: vagrant
+    user: WORKER_USER
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
   roles:
     - kernel-devel
+    - build-essential
+    - language-pack-ja-base
     - user
     - ag
     - ctags

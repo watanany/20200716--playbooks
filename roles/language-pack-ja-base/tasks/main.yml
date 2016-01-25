@@ -1,0 +1,5 @@
+---
+- name: install language-pack-ja-base in Debian family
+  sudo: yes
+  apt: name=language-pack-ja-base state=latest
+  when: ansible_os_family == 'Debian'
