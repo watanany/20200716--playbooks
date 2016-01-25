@@ -3,7 +3,7 @@ version: 2.8.21
 download_url: http://download.redis.io/releases/redis-{{ version }}.tar.gz
 download_dest: /tmp
 downloaded_file: "{{ download_dest }}/redis-{{ version }}.tar.gz"
-source_dir: /tmp/redis-{{ version }}
+source_dir: "/tmp/redis-{{ version }}"
 port: 6379
 conf_file: /etc/redis/{{ port }}.conf
 pid_file: /var/run/redis_{{ port }}.pid

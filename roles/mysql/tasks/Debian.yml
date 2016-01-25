@@ -1,7 +1,7 @@
 ---
 - name: install mysql
   sudo: yes
-  apt: name=mysql-server
+  apt: name=mysql-server state=latest
 
 - name: service mysql
   sudo: yes

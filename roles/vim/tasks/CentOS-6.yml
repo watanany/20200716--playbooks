@@ -1,11 +1,11 @@
 ---
 - name: groupinstall Development tools
   sudo: yes
-  yum: name="@Development tools"
+  yum: name="@Development tools" state=latest
 
 - name: install dependencies
   sudo: yes
-  yum: name={{item}}
+  yum: name={{item}} state=latest
   with_items:
     - ncurses-devel
     - lua-devel
