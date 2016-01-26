@@ -1,4 +1,44 @@
 ---
-- name: install vim
+- name: install build-essential
   sudo: yes
-  apt: name=vim state=latest
+  apt: name=build-essential state=latest
+
+- name: install dependencies
+  sudo: yes
+  apt: name={{item}} state=latest
+  with_items:
+    - ncurses-dev
+    - libtolua-dev
+    - python-dev
+    - ruby-dev
+
+- name: clone vim repositry from github
+  sudo: yes
+  git: >
+    repo=https://github.com/vim/vim.git
+    dest={{src_dir}}
+    force=yes
+
+- name: configure vim source
+  sudo: yes
+  shell: >
+    ./configure
+    --with-features=huge
+    --enable-multibyte
+    --enable-luainterp
+    --enable-rubyinterp
+    --enable-pythoninterp
+  args:
+    chdir: "{{src_dir}}"
+
+- name: compile vim source
+  sudo: yes
+  shell: make
+  args:
+    chdir: "{{src_dir}}"
+
+- name: install vim files
+  sudo: yes
+  shell: make install
+  args:
+    chdir: "{{src_dir}}"
