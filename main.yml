@@ -12,6 +12,7 @@
     - user
     - ag
     - ctags
+    - ffmpeg
     - tmux
     - tree
     - zsh
