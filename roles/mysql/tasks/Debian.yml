@@ -1,10 +1,10 @@
 ---
 - name: install mysql
-  sudo: yes
+  become: yes
   apt: name=mysql-server state=latest
 
 - name: service mysql
-  sudo: yes
+  become: yes
   service:
     name: mysql
     state: started

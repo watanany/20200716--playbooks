@@ -1,5 +1,5 @@
 ---
 - name: install kernel-devel in CentOS
-  sudo: yes
+  become: yes
   yum: name=http://mirror.centos.org/centos/6/centosplus/x86_64/Packages/kernel-devel-2.6.32-573.7.1.el6.centos.plus.x86_64.rpm
   when: ansible_distribution == 'CentOS'

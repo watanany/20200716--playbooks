@@ -1,5 +1,5 @@
 ---
 - name: install ImageMagick-devel in RedHat family
-  sudo: yes
+  become: yes
   yum: name=ImageMagick-devel state=latest
   when: ansible_os_family == 'RedHat'

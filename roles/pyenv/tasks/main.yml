@@ -1,6 +1,6 @@
 ---
 - name: install dependencies in CentOS
-  sudo: yes
+  become: yes
   yum: name={{item}} state=latest
   with_items:
     - openssl-devel
@@ -11,7 +11,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: install dependencies in Debian family
-  sudo: yes
+  become: yes
   apt: name={{item}} state=latest
   with_items:
     - make
@@ -28,15 +28,15 @@
   when: ansible_os_family == 'Debian'
 
 - name: install pyenv
-  sudo: yes
+  become: yes
   git: repo=https://github.com/yyuu/pyenv.git dest={{pyenv_root}}
 
 - name: make pyenv group
-  sudo: yes
+  become: yes
   group: name=pyenv
 
 - name: set pyenv env file
-  sudo: yes
+  become: yes
   template: >
     src=pyenv.sh.j2
     dest=/etc/profile.d/pyenv.sh
@@ -44,7 +44,7 @@
     group=pyenv
 
 - name: change attributes of {{pyenv_root}}
-  sudo: yes
+  become: yes
   file:
     path: "{{pyenv_root}}"
     mode: g+rwXs
@@ -53,13 +53,13 @@
     recurse: yes
 
 - name: install virtualenv as pyenv plugin
-  sudo: yes
+  become: yes
   git: >
     repo=https://github.com/yyuu/pyenv-virtualenv.git
     dest={{pyenv_root}}/plugins/pyenv-virtualenv
 
 - name: add user to pyenv group
-  sudo: yes
+  become: yes
   user: name={{pyenv_user}} append=yes groups=pyenv
 
 - name: check whether python was already installed or not

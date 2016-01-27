@@ -1,6 +1,6 @@
 ---
 - name: install dependencies in CentOS
-  sudo: yes
+  become: yes
   yum: name={{item}} state=latest
   with_items:
     - gcc
@@ -14,7 +14,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: install dependencies in Debian family
-  sudo: yes
+  become: yes
   apt: name={{item}} state=latest
   with_items:
     - autoconf
@@ -31,19 +31,19 @@
   when: ansible_os_family == 'Debian'
 
 - name: install rbenv
-  sudo: yes
+  become: yes
   git: repo=https://github.com/sstephenson/rbenv.git dest={{rbenv_root}}
 
 - name: install ruby-build
-  sudo: yes
+  become: yes
   git: repo=https://github.com/sstephenson/ruby-build.git dest={{rbenv_root}}/plugins/ruby-build
 
 - name: make rbenv group
-  sudo: yes
+  become: yes
   group: name=rbenv
 
 - name: set rbenv env file
-  sudo: yes
+  become: yes
   template: >
     src=rbenv.sh.j2
     dest=/etc/profile.d/rbenv.sh
@@ -51,7 +51,7 @@
     group=rbenv
 
 - name: change attributes of {{rbenv_root}}
-  sudo: yes
+  become: yes
   file:
     path: "{{rbenv_root}}"
     mode: g+rwXs
@@ -60,7 +60,7 @@
     recurse: yes
 
 - name: add user to rbenv group
-  sudo: yes
+  become: yes
   user: name={{rbenv_user}} append=yes groups=rbenv
 
 - name: check whether ruby was already installed or not

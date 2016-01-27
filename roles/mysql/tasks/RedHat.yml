@@ -1,6 +1,6 @@
 ---
 - name: install mysql
-  sudo: yes
+  become: yes
   yum: name={{item}} state=latest
   with_items:
     - mysql
@@ -9,7 +9,7 @@
     - mysql-utilities
 
 - name: service mysql
-  sudo: yes
+  become: yes
   service:
     name: mysqld
     state: started

@@ -1,10 +1,10 @@
 ---
 - name: groupinstall Development tools
-  sudo: yes
+  become: yes
   yum: name="@Development tools" state=latest
 
 - name: install dependencies
-  sudo: yes
+  become: yes
   yum: name={{item}} state=latest
   with_items:
     - ncurses-devel
@@ -13,14 +13,14 @@
     - ruby-devel
 
 - name: clone vim repositry from github
-  sudo: yes
+  become: yes
   git: >
     repo=https://github.com/vim/vim.git
     dest={{src_dir}}
     force=yes
 
 - name: configure vim source
-  sudo: yes
+  become: yes
   shell: >
     ./configure
     --with-features=huge
@@ -32,13 +32,13 @@
     chdir: "{{src_dir}}"
 
 - name: compile vim source
-  sudo: yes
+  become: yes
   shell: make
   args:
     chdir: "{{src_dir}}"
 
 - name: install vim files
-  sudo: yes
+  become: yes
   shell: make install
   args:
     chdir: "{{src_dir}}"

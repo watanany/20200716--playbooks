@@ -15,13 +15,13 @@
     chdir={{ source_dir }}
 
 - name: install redis
-  sudo: yes
+  become: yes
   command: >
     make install
     chdir={{ source_dir }}
 
 - name: make directory
-  sudo: yes
+  become: yes
   file: >
     path=/etc/redis
     state=directory
@@ -29,7 +29,7 @@
     mode=0755
 
 - name: make directory
-  sudo: yes
+  become: yes
   file: >
     path=/var/redis/{{ port }}
     state=directory
@@ -37,42 +37,42 @@
     mode=0755
 
 - name: copy config file
-  sudo: yes
+  become: yes
   copy: >
     src={{ source_dir }}/redis.conf
     dest={{ conf_file }}
     owner=root
 
 - name: make redis daemon
-  sudo: yes
+  become: yes
   lineinfile: >
     dest={{ conf_file }}
     regexp="daemonize no"
     line="daemonize yes"
 
 - name: point pidfile
-  sudo: yes
+  become: yes
   lineinfile: >
     dest={{ conf_file }}
     regexp="pidfile\s+.*"
     line="pidfile {{ pid_file }}"
 
 - name: point logfile
-  sudo: yes
+  become: yes
   lineinfile: >
     dest={{ conf_file }}
     regexp="logfile\s+.*"
     line="logfile {{ log_file }}"
 
 - name: point redis directory
-  sudo: yes
+  become: yes
   lineinfile: >
     dest={{ conf_file }}
     regexp="dir\s+.*"
     line="dir {{ redis_dir }}"
 
 - name: copy init script
-  sudo: yes
+  become: yes
   copy: >
     src={{ source_dir }}/utils/redis_init_script
     dest=/etc/init.d/redis-server

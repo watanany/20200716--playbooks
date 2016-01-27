@@ -1,7 +1,7 @@
 ---
 
 - name: install dependecies in CentOS
-  sudo: yes
+  become: yes
   yum: name={{ item }} state=latest
   with_items:
     - pcre-devel
@@ -10,7 +10,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: install dependecies in Debian family
-  sudo: yes
+  become: yes
   apt: name={{ item }} state=latest
   with_items:
     - libpcre3-dev
@@ -40,7 +40,7 @@
     chdir={{ source_dir }}
 
 - name: install nginx
-  sudo: yes
+  become: yes
   command: >
     make install
     chdir={{ source_dir }}
