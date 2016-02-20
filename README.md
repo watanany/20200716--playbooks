@@ -1,20 +1,27 @@
 # playbooks
 
-個人的に必要なものを集めたAnsibleファイル群
-
-_CentOS 6_と_Debian系OS_に対応
-パスワードなしでsudo可能なユーザーで実行
+Ansible files
+(passwordless sudoers can execute)
 
 * kernel-devel
-* user - create wheel user
+* build-essential
+* user
+  * create a wheel group user in CentOS
+  * create a user in Debian family
+* vim
+  * install latest version vim 
 * zsh
 * tmux
-* vim
 * ag
 * ctags
-* rbenv - System Wide
-* pyenv - System Wide
-* nvm - System Wide
-* MySQL(バージョン指定できないため要変更)
+* rbenv
+  * System Wide
+* pyenv
+  * System Wide
+* nvm
+  * System Wide
+* MySQL
+  * this role cannot specify install version yet
 * redis
-* nginx(CentOS 6のみテスト)
+* nginx
+  * this role was only tested in CentOS 6
