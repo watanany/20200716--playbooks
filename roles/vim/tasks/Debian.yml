@@ -7,10 +7,17 @@
   become: yes
   apt: name={{item}} state=latest
   with_items:
-    - ncurses-dev
-    - libtolua-dev
+    - gettext
+    - libncurses5-dev
+    - libacl1-dev
+    - libgpm-dev
     - python-dev
+    - python3-dev
     - ruby-dev
+    - lua5.2
+    - liblua5.2-dev
+    - luajit
+    - libluajit-5.1-2
 
 - name: clone vim repositry from github
   become: yes
@@ -26,8 +33,11 @@
     --with-features=huge
     --enable-multibyte
     --enable-luainterp
+    --enable-luajit
     --enable-rubyinterp
     --enable-pythoninterp
+    --enable-python3interp
+    --enable-fail-if-missing
   args:
     chdir: "{{src_dir}}"
 
