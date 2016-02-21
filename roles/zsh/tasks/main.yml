@@ -8,10 +8,3 @@
   become: yes
   apt: name=zsh state=latest
   when: ansible_os_family == 'Debian'
-
-- name: copy zprofile to /etc/zsh
-  become: yes
-  copy: >
-    src=zprofile
-    dest=/etc/zsh/zprofile
-    mode=644
