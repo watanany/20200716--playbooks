@@ -7,13 +7,16 @@ Ansible files
 
 ## Roles
 
-* kernel-devel
-* build-essential
-* user
+* kernel-devel(RedHat)
+* build-essential(Debian)
+* user creation
   * create a wheel group user in CentOS
   * create a user in Debian family
+* git
+  * this role can specify install version
 * vim
-  * install latest version vim 
+  * this role installs latest version vim
+  * TODO: enable role to specify install version
 * zsh
 * tmux
 * ag
