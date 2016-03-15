@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:
-    user: WORKER_USER
+    user: vagrant
     rbenv_user: "{{user}}"
     nvm_user: "{{user}}"
     pyenv_user: "{{user}}"
@@ -12,7 +12,6 @@
     - user
     - ag
     - ctags
-    - ffmpeg
     - tmux
     - tree
     - zsh
