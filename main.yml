@@ -10,6 +10,7 @@
     - build-essential
     - language-pack-ja-base
     - user
+    - git
     - ag
     - ctags
     - tmux
