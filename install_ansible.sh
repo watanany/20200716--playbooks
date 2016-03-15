@@ -59,8 +59,11 @@ get_os_info() {
 # ------------------------------------------------------------
 
 if [ `get_os_distribution` = 'ubuntu' ]; then
-    sudo aptitude install software-properties-common
+    sudo aptitude -y install software-properties-common
     sudo apt-add-repository ppa:ansible/ansible
     sudo aptitude update
-    sudo aptitude install ansible
+    sudo aptitude -y install ansible
+elif [ `get_os_distribution` = 'redhat' ]; then
+    sudo yum -y update
+    sudo yum -y install ansible
 fi
