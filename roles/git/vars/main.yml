@@ -1,0 +1,7 @@
+---
+version: 2.7.3
+download_url: https://github.com/git/git/archive/v{{ version }}.tar.gz
+download_dest: /tmp
+downloaded_file: "{{ download_dest }}/git-{{ version }}.tar.gz"
+source_dir: "{{ download_dest }}/git-{{ version }}"
+prefix: /usr/local

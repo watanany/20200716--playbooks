@@ -1,0 +1,44 @@
+---
+- name: install dependencies in CentOS
+  become: yes
+  yum: name={{item}} state=latest
+  with_items:
+    - curl-devel
+    - expat-devel
+    - gettext-devel
+    - openssl-devel
+    - zlib-devel
+    - perl-ExtUtils-MakeMaker
+  when: ansible_os_family == 'RedHat'
+
+- name: install dependecies in Debian family
+  become: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - libcurl4-gnutls-dev
+    - libexpat1-dev
+    - gettext
+    - libz-dev
+    - libssl-dev
+  when: ansible_os_family == 'Debian'
+
+- name: install git
+  get_url: >
+    url={{ download_url }}
+    dest={{ download_dest }}
+
+- name: decompose downloaded file
+  command: >
+    tar xzf {{ downloaded_file }}
+    chdir={{ download_dest }}
+
+- name: compile sources
+  command: >
+    make prefix={{ prefix }} all
+    chdir={{ source_dir }}
+
+- name: install nginx
+  become: yes
+  command: >
+    make prefix={{ prefix }} install
+    chdir={{ source_dir }}
