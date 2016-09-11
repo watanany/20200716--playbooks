@@ -1,25 +1,10 @@
 ---
 - hosts: all
-  vars:
-    user: vagrant
-    rbenv_user: "{{user}}"
-    nvm_user: "{{user}}"
-    pyenv_user: "{{user}}"
+  connection: local
   roles:
     - kernel-devel
     - build-essential
     - language-pack-ja-base
-    - user
-    - git
-    - ag
-    - ctags
-    - tmux
-    - tree
-    - zsh
-    - vim
-    - mysql
-    - redis
-    - nginx
     - nvm
     - pyenv
     - rbenv
