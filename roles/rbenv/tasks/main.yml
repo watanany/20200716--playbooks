@@ -58,24 +58,3 @@
     group: rbenv
     state: directory
     recurse: yes
-
-- name: add user to rbenv group
-  become: yes
-  user: name={{rbenv_user}} append=yes groups=rbenv
-
-- name: check whether ruby was already installed or not
-  shell: /bin/bash -lc 'rbenv global {{ruby_version}}'
-  ignore_errors: yes
-  register: result
-
-- name: install ruby with rbenv
-  shell: /bin/bash -lc 'rbenv install {{ruby_version}}'
-  when: result|failed
-
-- name: set ruby {{ruby_version}} for system
-  shell: /bin/bash -lc 'rbenv global {{ruby_version}} && rbenv rehash'
-  when: result|failed
-
-- name: install gem bundler
-  command: /bin/bash -lc 'gem install bundler'
-  when: result|failed

@@ -57,20 +57,3 @@
   git: >
     repo=https://github.com/yyuu/pyenv-virtualenv.git
     dest={{pyenv_root}}/plugins/pyenv-virtualenv
-
-- name: add user to pyenv group
-  become: yes
-  user: name={{pyenv_user}} append=yes groups=pyenv
-
-- name: check whether python was already installed or not
-  shell: /bin/bash -lc 'pyenv global {{python_version}}'
-  ignore_errors: yes
-  register: result
-
-- name: install python with pyenv
-  shell: /bin/bash -lc 'pyenv install {{python_version}}'
-  when: result|failed
-
-- name: set python {{python_version}} for system
-  shell: /bin/bash -lc 'pyenv global {{python_version}} && pyenv rehash'
-  when: result|failed

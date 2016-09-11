@@ -21,13 +21,3 @@
 - name: set node.js env file
   become: yes
   template: src=nvm.sh.j2 dest=/etc/profile.d/nvm.sh
-
-- name: add user to nvm group
-  become: yes
-  user: name={{nvm_user}} append=yes groups=nvm
-
-- name: install node.js with nvm
-  shell: /bin/bash -lc 'nvm install {{node_version}}'
-
-- name: set node.js {{node_version}} for system
-  shell: /bin/bash -lc 'nvm alias default {{node_version}}'
