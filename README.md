@@ -5,6 +5,11 @@
 Ansible files
 (passwordless sudoers can execute)
 
+## USAGE
+```
+$ ansible-playbook -i hosts main.yml
+```
+
 ## Roles
 
 * kernel-devel(RedHat)
