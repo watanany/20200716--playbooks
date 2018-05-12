@@ -1,0 +1,29 @@
+---
+- name: install ndenv
+  become: yes
+  git: repo=https://github.com/riywo/ndenv dest={{ndenv_root}}
+
+- name: install node-build
+  become: yes
+  git: repo=https://github.com/riywo/node-build.git dest={{ndenv_root}}/plugins/node-build
+
+- name: make ndenv group
+  become: yes
+  group: name=ndenv
+
+- name: set ndenv env file
+  become: yes
+  template: >
+    src=ndenv.sh.j2
+    dest=/etc/profile.d/ndenv.sh
+    mode=664
+    group=ndenv
+
+- name: change attributes of {{ndenv_root}}
+  become: yes
+  file:
+    path: "{{ndenv_root}}"
+    mode: g+rwXs
+    group: ndenv
+    state: directory
+    recurse: yes
